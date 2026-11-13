@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PsyNote 心理學知識筆記，帶你用生活化的方式認識心理學。">
+  <title>PsyNote｜心理學知識筆記</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="PsyNote 首頁"><span class="brand-mark">ψ</span> PsyNote</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="開啟導覽選單" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">首頁</a>
+      <a href="#topics">知識分類</a>
+      <a href="#quiz">心理小測驗</a>
+      <a href="#about">關於本站</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">UNDERSTAND YOUR MIND</p>
+        <h1>從理解心理學，<br><span>開始理解自己。</span></h1>
+        <p class="hero-description">把複雜的心理學概念，變成簡單、貼近日常生活的知識筆記。</p>
+        <a class="button button-primary" href="#topics">開始探索 <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="brain-symbol">ψ</div>
+        <span class="float-note note-one">思考</span><span class="float-note note-two">記憶</span>
+        <span class="float-note note-three">情緒</span>
+      </div>
+    </section>
+
+    <section class="section" id="topics">
+      <div class="section-heading">
+        <p class="eyebrow">EXPLORE TOPICS</p>
+        <h2>心理學知識分類</h2>
+        <p>從不同角度認識人類的思考、行為與情緒。</p>
+      </div>
+      <div class="topic-grid">
+        <article class="topic-card">
+          <div class="topic-icon lavender">🧠</div><p class="card-label">01 / INTRODUCTION</p>
+          <h3>心理學入門</h3><p>認識心理學在研究什麼，以及常見的研究方法。</p>
+          <a href="pages/introduction.html" class="text-link">閱讀筆記 →</a>
+        </article>
+        <article class="topic-card">
+          <div class="topic-icon peach">💭</div><p class="card-label">02 / COGNITIVE</p>
+          <h3>認知心理學</h3><p>探索注意力、記憶、學習與人類如何思考。</p>
+          <a href="pages/cognitive.html" class="text-link">閱讀筆記 →</a>
+        </article>
+        <article class="topic-card">
+          <div class="topic-icon blue">⚡</div><p class="card-label">03 / BIOLOGICAL</p>
+          <h3>生理心理學</h3><p>了解大腦、神經系統與行為之間的關係。</p>
+          <a href="pages/biological.html" class="text-link">閱讀筆記 →</a>
+        </article>
+        <article class="topic-card">
+          <div class="topic-icon green">👥</div><p class="card-label">04 / SOCIAL</p>
+          <h3>社會心理學</h3><p>看看群體、文化與人際互動如何影響我們。</p>
+          <a href="pages/social.html" class="text-link">閱讀筆記 →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+      <div class="quiz-copy">
+        <p class="eyebrow">QUICK CHECK</p><h2>用一題小測驗，<br>檢查看看你懂多少！</h2>
+        <p>從日常情境出發，輕鬆複習心理學概念。</p>
+      </div>
+      <div class="quiz-card">
+        <p class="quiz-count">心理學小測驗 · 01</p>
+        <h3>當身邊的人都選擇同一個答案時，你也因此改變自己的選擇。這比較接近哪個概念？</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-answer="a">A. 從眾效應</button>
+          <button class="quiz-option" data-answer="b">B. 古典制約</button>
+          <button class="quiz-option" data-answer="c">C. 工作記憶</button>
+        </div>
+        <p class="quiz-feedback" id="quizFeedback" aria-live="polite">選擇一個答案，看看結果吧！</p>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div><p class="eyebrow">ABOUT PSYNOTE</p><h2>讓心理學，<br>成為生活的一部分。</h2></div>
+      <p>PsyNote 是一個心理學入門知識整理專案。希望透過清楚的分類、簡單的說明與生活案例，讓心理學不再只是課本上的名詞，而是理解自己與他人的另一種方式。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark">ψ</span> PsyNote</a><p>用好奇心認識心理，用知識理解生活。</p><small>© 2026 PsyNote · 學習與知識分享用途</small></footer>
+  <script src="js/script.js"></script>
+</body>
+</html>
