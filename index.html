@@ -1,94 +1,195 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="PsyNote 心理學知識筆記，帶你用生活化的方式認識心理學。">
-  <title>PsyNote｜心理學知識筆記</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="用生活情境認識社會心理學，互動探索從眾、旁觀者效應、刻板印象與服從權威。">
+<title>MindLab 心理學情境探索站</title>
+<style>
+:root{
+  --bg:#f6f4ef;--paper:#fffefa;--ink:#24312f;--muted:#687571;
+  --green:#2d6a5d;--mint:#dcece5;--orange:#e69b62;--line:#e5e4dc;
+  --shadow:0 14px 38px rgba(42,58,52,.09);--radius:22px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-rounded,"Noto Sans TC",system-ui,-apple-system,sans-serif;line-height:1.65}
+button{font:inherit;cursor:pointer}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(246,244,239,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1100px;margin:auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:900;font-size:1.1rem;letter-spacing:.02em;color:var(--green)}
+.brand span{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:11px;background:var(--green);color:white;margin-right:8px}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks a{text-decoration:none;color:var(--muted);font-size:.92rem;padding:7px 11px;border-radius:999px}
+.navlinks a:hover{background:var(--mint);color:var(--green)}
+main{max-width:1100px;margin:auto;padding:28px 22px 70px}
+.hero{position:relative;overflow:hidden;background:var(--green);color:white;border-radius:30px;padding:clamp(30px,6vw,68px);box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-55px;top:-85px;background:rgba(255,255,255,.09)}
+.kicker{text-transform:uppercase;letter-spacing:.15em;font-size:.78rem;font-weight:800;color:#cce5d9}
+h1{font-size:clamp(2.25rem,6vw,4.5rem);line-height:1.12;max-width:720px;margin:14px 0}
+.hero p{font-size:1.12rem;color:#e2eee8;max-width:620px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{border:0;border-radius:13px;padding:12px 19px;font-weight:800;transition:.18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-light{background:#fffefa;color:var(--green)}
+.btn-outline{background:transparent;color:white;border:1px solid rgba(255,255,255,.5)}
+.section{margin-top:58px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:20px}
+.section-head h2{font-size:clamp(1.6rem,4vw,2.25rem);margin:0}
+.section-head p{margin:4px 0 0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.topic-card,.panel,.scenario-card,.result-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.topic-card{padding:21px;min-height:205px;display:flex;flex-direction:column}
+.topic-icon{font-size:1.8rem}
+.topic-card h3{margin:10px 0 5px;font-size:1.12rem}
+.topic-card p{margin:0;color:var(--muted);font-size:.93rem;flex:1}
+.topic-card button{margin-top:15px;align-self:flex-start;border:0;background:var(--mint);color:var(--green);font-weight:800;padding:8px 12px;border-radius:10px}
+.panel{padding:clamp(20px,4vw,34px)}
+.scenario-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pill{background:var(--mint);color:var(--green);font-size:.82rem;font-weight:800;padding:6px 11px;border-radius:999px}
+.step{font-size:.88rem;color:var(--muted)}
+.progress{height:8px;background:#e9e9e1;border-radius:99px;overflow:hidden;margin:15px 0 25px}
+.progress>div{height:100%;width:0;background:var(--orange);transition:width .3s}
+.scenario-card{padding:clamp(20px,4vw,32px);box-shadow:none}
+.scenario-card h3{font-size:clamp(1.35rem,3vw,1.8rem);line-height:1.35;margin:8px 0 12px}
+.scenario-card p{color:var(--muted);font-size:1.04rem}
+.options{display:grid;gap:10px;margin-top:22px}
+.option{width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);padding:14px 16px;border-radius:14px;color:var(--ink);transition:.15s}
+.option:hover{border-color:var(--green);background:#f4faf6}
+.option:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.feedback{display:none;margin-top:18px;padding:17px;border-radius:14px;background:#edf5f0;border-left:4px solid var(--green)}
+.feedback.show{display:block}
+.feedback strong{display:block;margin-bottom:4px;color:var(--green)}
+.feedback p{margin:0;color:#40534d}
+.next-row{display:flex;justify-content:flex-end;margin-top:17px}
+.btn-green{background:var(--green);color:white}
+.btn-green:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.result-card{padding:25px;margin-top:20px;display:none}
+.result-card.show{display:block}
+.result-card h3{margin-top:0}
+.score{font-size:2.5rem;font-weight:900;color:var(--green)}
+.reflection{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.reflection .panel h3{margin-top:0}
+textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;resize:vertical;background:#fff}
+.save-note{font-size:.85rem;color:var(--muted);margin-top:8px}
+footer{border-top:1px solid var(--line);padding:25px 22px;text-align:center;color:var(--muted);font-size:.88rem}
+.modal{position:fixed;inset:0;background:rgba(15,30,26,.55);display:none;place-items:center;padding:20px;z-index:30}
+.modal.show{display:grid}
+.modal-box{max-width:560px;width:100%;background:var(--paper);padding:28px;border-radius:22px;box-shadow:var(--shadow);position:relative}
+.modal-box h2{margin-top:0}
+.close{position:absolute;right:17px;top:15px;border:0;background:#eef0e9;border-radius:50%;width:36px;height:36px}
+@media(max-width:850px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.nav{align-items:flex-start;flex-direction:column}.navlinks{gap:2px}.navlinks a{padding:6px 8px}.cards{grid-template-columns:1fr}.reflection{grid-template-columns:1fr}.hero{border-radius:22px}}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="PsyNote 首頁"><span class="brand-mark">ψ</span> PsyNote</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="開啟導覽選單" aria-expanded="false">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="#home">首頁</a>
-      <a href="#topics">知識分類</a>
-      <a href="#quiz">心理小測驗</a>
-      <a href="#about">關於本站</a>
-    </nav>
-  </header>
+<header class="topbar">
+  <nav class="nav">
+    <div class="brand"><span>心</span>MindLab</div>
+    <div class="navlinks">
+      <a href="#topics">探索主題</a><a href="#scenario">情境挑戰</a><a href="#reflection">今日反思</a>
+    </div>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="kicker">Psychology · Learn by exploring</div>
+    <h1>讀懂心理，<br>也讀懂日常生活。</h1>
+    <p>從熟悉的生活情境出發，探索我們為什麼會跟著大家做、為什麼有時不敢幫忙，以及想法如何影響判斷。</p>
+    <div class="hero-actions">
+      <button class="btn btn-light" onclick="document.querySelector('#scenario').scrollIntoView()">開始情境挑戰 →</button>
+      <button class="btn btn-outline" onclick="document.querySelector('#topics').scrollIntoView()">先逛心理學主題</button>
+    </div>
+  </section>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <p class="eyebrow">UNDERSTAND YOUR MIND</p>
-        <h1>從理解心理學，<br><span>開始理解自己。</span></h1>
-        <p class="hero-description">把複雜的心理學概念，變成簡單、貼近日常生活的知識筆記。</p>
-        <a class="button button-primary" href="#topics">開始探索 <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="brain-symbol">ψ</div>
-        <span class="float-note note-one">思考</span><span class="float-note note-two">記憶</span>
-        <span class="float-note note-three">情緒</span>
-      </div>
-    </section>
+  <section class="section" id="topics">
+    <div class="section-head"><div><h2>心理學主題探索</h2><p>點選卡片，快速認識四個社會心理學概念。</p></div></div>
+    <div class="cards">
+      <article class="topic-card"><div class="topic-icon">👥</div><h3>從眾效應</h3><p>當多數人都這麼做，我們為什麼容易跟著做？</p><button onclick="openTopic('conformity')">探索概念 ↗</button></article>
+      <article class="topic-card"><div class="topic-icon">🆘</div><h3>旁觀者效應</h3><p>為什麼在某些情境中，旁邊的人越多，個人越可能猶豫？</p><button onclick="openTopic('bystander')">探索概念 ↗</button></article>
+      <article class="topic-card"><div class="topic-icon">🏷️</div><h3>刻板印象</h3><p>我們如何用群體標籤理解他人，又可能忽略什麼？</p><button onclick="openTopic('stereotype')">探索概念 ↗</button></article>
+      <article class="topic-card"><div class="topic-icon">🎓</div><h3>服從權威</h3><p>權威者的指令，可能如何影響我們的行動？</p><button onclick="openTopic('obedience')">探索概念 ↗</button></article>
+    </div>
+  </section>
 
-    <section class="section" id="topics">
-      <div class="section-heading">
-        <p class="eyebrow">EXPLORE TOPICS</p>
-        <h2>心理學知識分類</h2>
-        <p>從不同角度認識人類的思考、行為與情緒。</p>
+  <section class="section" id="scenario">
+    <div class="section-head"><div><h2>生活情境挑戰</h2><p>選擇你覺得最可能的反應，看看背後有哪些心理學概念。</p></div></div>
+    <div class="panel">
+      <div class="scenario-top"><span class="pill" id="scenarioTag">情境 1</span><span class="step" id="stepText">第 1 / 4 題</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="scenario-card">
+        <div class="kicker" style="color:var(--green)">THINK ABOUT IT</div>
+        <h3 id="questionTitle"></h3><p id="questionText"></p>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback" aria-live="polite"><strong id="feedbackTitle"></strong><p id="feedbackText"></p></div>
+        <div class="next-row"><button class="btn btn-green" id="nextBtn" onclick="nextQuestion()" disabled>下一題 →</button></div>
       </div>
-      <div class="topic-grid">
-        <article class="topic-card">
-          <div class="topic-icon lavender">🧠</div><p class="card-label">01 / INTRODUCTION</p>
-          <h3>心理學入門</h3><p>認識心理學在研究什麼，以及常見的研究方法。</p>
-          <a href="pages/introduction.html" class="text-link">閱讀筆記 →</a>
-        </article>
-        <article class="topic-card">
-          <div class="topic-icon peach">💭</div><p class="card-label">02 / COGNITIVE</p>
-          <h3>認知心理學</h3><p>探索注意力、記憶、學習與人類如何思考。</p>
-          <a href="pages/cognitive.html" class="text-link">閱讀筆記 →</a>
-        </article>
-        <article class="topic-card">
-          <div class="topic-icon blue">⚡</div><p class="card-label">03 / BIOLOGICAL</p>
-          <h3>生理心理學</h3><p>了解大腦、神經系統與行為之間的關係。</p>
-          <a href="pages/biological.html" class="text-link">閱讀筆記 →</a>
-        </article>
-        <article class="topic-card">
-          <div class="topic-icon green">👥</div><p class="card-label">04 / SOCIAL</p>
-          <h3>社會心理學</h3><p>看看群體、文化與人際互動如何影響我們。</p>
-          <a href="pages/social.html" class="text-link">閱讀筆記 →</a>
-        </article>
+      <div class="result-card" id="resultCard">
+        <h3>挑戰完成！</h3><div class="score" id="scoreText"></div><p id="resultText"></p>
+        <button class="btn btn-green" onclick="restartQuiz()">再挑戰一次</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="quiz-section" id="quiz">
-      <div class="quiz-copy">
-        <p class="eyebrow">QUICK CHECK</p><h2>用一題小測驗，<br>檢查看看你懂多少！</h2>
-        <p>從日常情境出發，輕鬆複習心理學概念。</p>
-      </div>
-      <div class="quiz-card">
-        <p class="quiz-count">心理學小測驗 · 01</p>
-        <h3>當身邊的人都選擇同一個答案時，你也因此改變自己的選擇。這比較接近哪個概念？</h3>
-        <div class="quiz-options">
-          <button class="quiz-option" data-answer="a">A. 從眾效應</button>
-          <button class="quiz-option" data-answer="b">B. 古典制約</button>
-          <button class="quiz-option" data-answer="c">C. 工作記憶</button>
-        </div>
-        <p class="quiz-feedback" id="quizFeedback" aria-live="polite">選擇一個答案，看看結果吧！</p>
-      </div>
-    </section>
+  <section class="section" id="reflection">
+    <div class="section-head"><div><h2>今日心理小筆記</h2><p>把概念連結到自己的生活，讓學習不只停留在答題。</p></div></div>
+    <div class="reflection">
+      <div class="panel"><h3>💭 想一想</h3><p>最近有沒有一次，你因為周圍人的反應而改變自己的想法或行動？當時發生了什麼事？</p><textarea id="reflectionInput" placeholder="寫下你的觀察……"></textarea><div class="save-note" id="saveStatus">內容只會保存在目前這台裝置的瀏覽器。</div><button class="btn btn-green" style="margin-top:12px" onclick="saveReflection()">儲存筆記</button></div>
+      <div class="panel"><h3>📌 今日提醒</h3><p>社會心理學不是要我們拒絕所有群體影響，而是幫助我們辨認影響、理解情境，再做出更有意識的選擇。</p><div class="pill">觀察 → 思考 → 選擇</div></div>
+    </div>
+  </section>
+</main>
+<footer>MindLab 心理學情境探索站 · 教育用途，概念介紹為入門摘要</footer>
 
-    <section class="about-section" id="about">
-      <div><p class="eyebrow">ABOUT PSYNOTE</p><h2>讓心理學，<br>成為生活的一部分。</h2></div>
-      <p>PsyNote 是一個心理學入門知識整理專案。希望透過清楚的分類、簡單的說明與生活案例，讓心理學不再只是課本上的名詞，而是理解自己與他人的另一種方式。</p>
-    </section>
-  </main>
+<div class="modal" id="topicModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="if(event.target===this)closeTopic()">
+  <div class="modal-box"><button class="close" onclick="closeTopic()" aria-label="關閉">✕</button><div class="kicker" style="color:var(--green)">PSYCHOLOGY NOTE</div><h2 id="modalTitle"></h2><p id="modalDefinition"></p><div class="callout" id="modalExample"></div><p class="save-note" id="modalTakeaway"></p></div>
+</div>
 
-  <footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark">ψ</span> PsyNote</a><p>用好奇心認識心理，用知識理解生活。</p><small>© 2026 PsyNote · 學習與知識分享用途</small></footer>
-  <script src="js/script.js"></script>
+<script>
+const topics={
+ conformity:{title:"從眾效應",definition:"從眾是指個人的想法或行為，受到群體意見、行為或社會規範影響而改變。常見原因包括希望被接納（規範性影響），以及在不確定時參考他人（資訊性影響）。",example:"生活例子：到了陌生的活動現場，不知道該怎麼報到，因此先觀察其他人的做法。",takeaway:"小提醒：參考別人有時很有幫助，但仍可以保留自己的判斷。"},
+ bystander:{title:"旁觀者效應",definition:"旁觀者效應是指在某些緊急情境中，其他人在場可能降低個人主動協助的可能性。可能原因包括責任分散、情境模糊，以及害怕判斷錯誤。",example:"生活例子：大家都看到有人需要協助，卻都以為其他人會先採取行動。",takeaway:"小提醒：若遇到需要協助的情況，先確保安全，並清楚指定求助對象。"},
+ stereotype:{title:"刻板印象",definition:"刻板印象是對某個群體成員形成的概括性信念，容易忽略每個人的個別差異。它和偏見（態度或評價）、歧視（差別對待行為）有關，但三者並不相同。",example:"生活例子：只因某人的年齡，就認定他一定不擅長使用科技，沒有先了解他的實際能力。",takeaway:"小提醒：判斷個人時，回到具體證據，不要只憑群體標籤。"},
+ obedience:{title:"服從權威",definition:"服從是指個人因為具有權威地位者提出直接指令，而依照指令行動。它和從眾不同：服從強調命令與權威關係。",example:"生活例子：在團體中，成員因為主管或老師的指示而採取某個行動。",takeaway:"小提醒：遇到不合理或涉及安全的要求，應先確認理由與後果，必要時尋求協助。"}
+};
+function openTopic(key){const t=topics[key];document.getElementById('modalTitle').textContent=t.title;document.getElementById('modalDefinition').textContent=t.definition;document.getElementById('modalExample').textContent=t.example;document.getElementById('modalTakeaway').textContent=t.takeaway;document.getElementById('topicModal').classList.add('show')}
+function closeTopic(){document.getElementById('topicModal').classList.remove('show')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTopic()});
+
+const questions=[
+ {tag:"從眾效應",title:"大家都推薦同一部電影",text:"朋友聚會時，大家都說某部電影非常好看。你原本沒看過，但也跟著說「真的很好看」。這個情境可能和哪個概念有關？",options:["從眾效應","旁觀者效應","刻板印象"],correct:0,why:"當你因為群體意見而調整自己的公開表達，可能涉及從眾。若是為了被接納，則可能是規範性社會影響。"},
+ {tag:"旁觀者效應",title:"大家都在看，卻沒人行動",text:"在公共場所，你看到有人似乎需要協助，周圍的人也都注意到了，但大家都在等待。這個情境可能涉及什麼？",options:["服從權威","旁觀者效應","刻板印象"],correct:1,why:"在某些情境中，旁觀者越多，個人可能越覺得責任由大家分擔，這稱為責任分散，是旁觀者效應的可能機制之一。"},
+ {tag:"刻板印象",title:"只用年齡判斷能力",text:"有人認為年紀較大的人一定不會使用新科技，沒有先了解對方的實際能力。這比較接近哪個概念？",options:["刻板印象","從眾效應","服從權威"],correct:0,why:"這是把某種概括性信念套用到群體成員身上，忽略個別差異，屬於刻板印象。"},
+ {tag:"服從權威",title:"因為是主管說的",text:"團隊成員收到主管的直接指令，便依照指示行動。這個情境最接近哪個概念？",options:["旁觀者效應","資訊性影響","服從權威"],correct:2,why:"這個情境強調具有權威地位者提出直接命令，個人依照指令行動，因此較接近服從。"}
+];
+let current=0,score=0,answered=false;
+function renderQuestion(){
+ const q=questions[current];answered=false;
+ document.getElementById('scenarioTag').textContent=q.tag;
+ document.getElementById('stepText').textContent=`第 ${current+1} / ${questions.length} 題`;
+ document.getElementById('progressBar').style.width=`${current/questions.length*100}%`;
+ document.getElementById('questionTitle').textContent=q.title;
+ document.getElementById('questionText').textContent=q.text;
+ document.getElementById('feedback').classList.remove('show');
+ document.getElementById('nextBtn').disabled=true;
+ document.getElementById('nextBtn').textContent=current===questions.length-1?"查看結果 →":"下一題 →";
+ const box=document.getElementById('options');box.innerHTML='';
+ q.options.forEach((label,i)=>{const b=document.createElement('button');b.className='option';b.textContent=label;b.onclick=()=>chooseAnswer(i);box.appendChild(b)});
+ document.getElementById('resultCard').classList.remove('show');
+ document.querySelector('.scenario-card').style.display='block';
+}
+function chooseAnswer(i){
+ if(answered)return;answered=true;const q=questions[current],correct=i===q.correct;if(correct)score++;
+ document.querySelectorAll('.option').forEach((b,n)=>{b.disabled=true;if(n===q.correct){b.style.borderColor='var(--green)';b.style.background='#edf5f0'}else if(n===i){b.style.borderColor='#d78362';b.style.background='#fff2ec'}});
+ document.getElementById('feedbackTitle').textContent=correct?'答對了！':'再認識一下這個概念';
+ document.getElementById('feedbackText').textContent=q.why;
+ document.getElementById('feedback').classList.add('show');document.getElementById('nextBtn').disabled=false;
+}
+function nextQuestion(){if(!answered)return;current++;if(current<questions.length){renderQuestion()}else{document.querySelector('.scenario-card').style.display='none';document.getElementById('progressBar').style.width='100%';document.getElementById('stepText').textContent='全部完成';document.getElementById('scoreText').textContent=`${score} / ${questions.length} 題答對`;document.getElementById('resultText').textContent=score===questions.length?'太棒了！你已經掌握這些入門概念。':'完成就是很好的開始！可以回到上方主題卡片，再複習不熟悉的概念。';document.getElementById('resultCard').classList.add('show')}}
+function restartQuiz(){current=0;score=0;renderQuestion()}
+function saveReflection(){const value=document.getElementById('reflectionInput').value;try{localStorage.setItem('mindlabReflection',value);document.getElementById('saveStatus').textContent='已儲存！下次在同一個瀏覽器開啟仍可看到。'}catch(e){document.getElementById('saveStatus').textContent='目前瀏覽器不允許本機儲存，請自行複製保留。'}}
+try{document.getElementById('reflectionInput').value=localStorage.getItem('mindlabReflection')||''}catch(e){}
+renderQuestion();
+</script>
 </body>
 </html>
